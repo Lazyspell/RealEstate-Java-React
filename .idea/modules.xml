@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/RealEstate-Java-React.iml" filepath="$PROJECT_DIR$/.idea/RealEstate-Java-React.iml" />
+      <module fileurl="file://$PROJECT_DIR$/realestate-java-react/realestate-java-react.iml" filepath="$PROJECT_DIR$/realestate-java-react/realestate-java-react.iml" />
+    </modules>
+  </component>
+</project>
