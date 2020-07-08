@@ -9,8 +9,8 @@ import java.util.Objects;
 public class Users {
 
     @Id
-    @GeneratedValue
-    private int invoice_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int user_id;
 
     @Column(nullable = false, unique = true)
     private String first_name;
@@ -24,6 +24,9 @@ public class Users {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private int house_owned;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -32,7 +35,7 @@ public class Users {
     }
 
     public Users(int invoice_id, String first_name, String last_name, String username, String email, UserRole role) {
-        this.invoice_id = invoice_id;
+        this.user_id = invoice_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
@@ -48,12 +51,12 @@ public class Users {
         this.role = role;
     }
 
-    public int getInvoice_id() {
-        return invoice_id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setInvoice_id(int invoice_id) {
-        this.invoice_id = invoice_id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirst_name() {
@@ -102,7 +105,7 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return invoice_id == users.invoice_id &&
+        return user_id == users.user_id &&
                 Objects.equals(first_name, users.first_name) &&
                 Objects.equals(last_name, users.last_name) &&
                 Objects.equals(username, users.username) &&
@@ -112,13 +115,13 @@ public class Users {
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoice_id, first_name, last_name, username, email, role);
+        return Objects.hash(user_id, first_name, last_name, username, email, role);
     }
 
     @Override
     public String toString() {
         return "Users{" +
-                "invoice_id=" + invoice_id +
+                "invoice_id=" + user_id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", username='" + username + '\'' +
