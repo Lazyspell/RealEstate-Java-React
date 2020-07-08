@@ -4,6 +4,7 @@ package com.example.realestatejavareact.services;
 import com.example.realestatejavareact.exceptions.ResourceNotFoundException;
 import com.example.realestatejavareact.entities.Users;
 import com.example.realestatejavareact.repositories.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,8 @@ public class UserService {
     private UserRepository userRepository;
 
    public List<Users> findAll(){
-       List<Users> result = (List<Users>) userRepository.findAll();
 
-       if(result.isEmpty()){
-           throw new ResourceNotFoundException("Database contains no Users");
-       }
-       return result;
+       return ((List<Users>) userRepository.findAll());
    }
 
 }

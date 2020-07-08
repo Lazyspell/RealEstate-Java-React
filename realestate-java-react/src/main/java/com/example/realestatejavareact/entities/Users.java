@@ -12,10 +12,10 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String first_name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String last_name;
 
     @Column(nullable = false, unique = true)
@@ -23,9 +23,6 @@ public class Users {
 
     @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
-    private int house_owned;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
