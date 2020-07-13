@@ -2,6 +2,7 @@ package com.example.realestatejavareact.services;
 
 
 import com.example.realestatejavareact.entities.City;
+import com.example.realestatejavareact.exceptions.BadRequestException;
 import com.example.realestatejavareact.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,15 @@ public class CityService {
 
         return ((List<City>) cityRepository.findAll());
     }
+//
+//    public City findById(int id){
+//
+//        if(id <= 0){
+//            throw new BadRequestException("Provided ID is invalid");
+//        }
+//
+//        return City cityRepository.findById(id);
+//
+//    }
 
 }
