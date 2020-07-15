@@ -3,7 +3,9 @@ package com.example.realestatejavareact.services;
 
 import com.example.realestatejavareact.entities.House;
 import com.example.realestatejavareact.exceptions.BadRequestException;
+import com.example.realestatejavareact.exceptions.ResourceNotFoundException;
 import com.example.realestatejavareact.repositories.HouseRepository;
+import com.example.realestatejavareact.web.dtos.Address;
 import com.example.realestatejavareact.web.dtos.HouseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,22 @@ public class HouseService {
             throw new BadRequestException("Invalid Id provided");
         }
         return new HouseDTO(houseRepository.findById(id).get());
+    }
+
+    @Transactional(readOnly = true)
+    public HouseDTO getByAddress(Address address){
+
+        if(address.getStreet_name() == null || address.getStreet_name().trim().equals("") || address.getStreet_number().trim().equals("") || address.getStreet_number() == null){
+            throw new BadRequestException("Invalid address provided");
+        }
+
+        House retrievedHouse = houseRepository.findByStreetNameAndStreetNumber(address.getStreet_name(), address.getStreet_number());
+
+        if(retrievedHouse == null){
+            throw new ResourceNotFoundException("No house found with that address");
+        }
+
+        return new HouseDTO(retrievedHouse);
     }
 
 }
