@@ -17,19 +17,24 @@ public class CityService {
     private CityRepository cityRepository;
 
     public List<City> findAll(){
-
         return ((List<City>) cityRepository.findAll());
     }
 
-//    public City findById(int id){
-//
-//        if(id <= 0){
-//            throw new BadRequestException("Provided ID is invalid");
-//        }
-//
-//        return City cityRepository.findById(id);
-//
-//    }
+    public City findById(int id){
+
+        if(id <= 0){
+            throw new BadRequestException("Provided ID is invalid");
+        }
+
+        City retrievedCity  = cityRepository.findById(id);
+
+        if(retrievedCity == null){
+            throw new ResourceNotFoundException("No City found with provided ID");
+        }
+
+        return retrievedCity;
+
+    }
 
     public City getByCityRank(int rank){
         if(rank <= 0){
