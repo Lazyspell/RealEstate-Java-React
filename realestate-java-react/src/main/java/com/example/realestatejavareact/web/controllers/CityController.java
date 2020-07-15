@@ -26,6 +26,6 @@ public class CityController {
         return cityService.findAll();
     }
 
-    @GetMapping(value = "/rank/{rank}")
+    @GetMapping(value = "/rank/{rank}", produces = MediaType.APPLICATION_JSON_VALUE)
     public City getByCityRank(@PathVariable int rank){return cityService.getByCityRank(rank);}
 }
