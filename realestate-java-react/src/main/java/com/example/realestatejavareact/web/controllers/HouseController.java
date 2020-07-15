@@ -30,12 +30,12 @@ public class HouseController {
         return houseService.findAll();
     }
 
-    @GetMapping(value = "/id/{id}")
+    @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HouseDTO getHouseById(@PathVariable int id, HttpServletRequest req){
         return houseService.getById(id);
     }
 
-    @PostMapping(value = "/address")
+    @PostMapping(value = "/address", produces = MediaType.APPLICATION_JSON_VALUE)
     public HouseDTO getByAddress(@RequestBody Address address){ return houseService.getByAddress(address);}
 
 }
