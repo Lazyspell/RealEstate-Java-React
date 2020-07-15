@@ -4,10 +4,7 @@ package com.example.realestatejavareact.web.controllers;
 import com.example.realestatejavareact.entities.City;
 import com.example.realestatejavareact.services.CityService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +17,6 @@ public class CityController {
 
     private CityService cityService;
 
-
     public CityController(CityService cityService){
         this.cityService = cityService;
     }
@@ -29,4 +25,7 @@ public class CityController {
     public List<City> getAllCities(HttpServletRequest req){
         return cityService.findAll();
     }
+
+    @GetMapping(value = "/rank/{rank}")
+    public City getByCityRank(@PathVariable int rank){return cityService.getByCityRank(rank);}
 }
