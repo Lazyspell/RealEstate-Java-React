@@ -24,6 +24,9 @@ public class Users {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -31,20 +34,22 @@ public class Users {
 
     }
 
-    public Users(int invoice_id, String first_name, String last_name, String username, String email, UserRole role) {
+    public Users(int invoice_id, String first_name, String last_name, String username, String email, String password, UserRole role) {
         this.user_id = invoice_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.email = email;
+        this.password = password;
         this.role = role;
     }
 
-    public Users(String first_name, String last_name, String username, String email, UserRole role) {
+    public Users(String first_name, String last_name, String username, String email, String password, UserRole role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.email = email;
+        this.password = password;
         this.role = role;
     }
 
@@ -88,6 +93,14 @@ public class Users {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public UserRole getRole() {
         return role;
     }
@@ -98,7 +111,6 @@ public class Users {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
@@ -107,22 +119,24 @@ public class Users {
                 Objects.equals(last_name, users.last_name) &&
                 Objects.equals(username, users.username) &&
                 Objects.equals(email, users.email) &&
+                Objects.equals(password, users.password) &&
                 role == users.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, first_name, last_name, username, email, role);
+        return Objects.hash(user_id, first_name, last_name, username, email, password, role);
     }
 
     @Override
     public String toString() {
         return "Users{" +
-                "invoice_id=" + user_id +
+                "user_id=" + user_id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
     }

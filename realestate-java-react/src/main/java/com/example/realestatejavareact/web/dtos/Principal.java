@@ -32,6 +32,8 @@ public class Principal {
 
     public Principal(Users user){
         this.id = user.getUser_id();
+        this.username = user.getUsername();
+        this.role = user.getRole();
     }
 
 

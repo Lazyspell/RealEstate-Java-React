@@ -15,7 +15,7 @@ public class County {
     private String county_name;
 
     @Column(nullable = false)
-    private String county_rank;
+    private int county_rank;
 
     @Column(nullable = false)
     private double county_housing_cost;
@@ -24,13 +24,13 @@ public class County {
 
     }
 
-    public County(String county_name, String county_rank, double county_housing_cost) {
+    public County(String county_name, int county_rank, double county_housing_cost) {
         this.county_name = county_name;
         this.county_rank = county_rank;
         this.county_housing_cost = county_housing_cost;
     }
 
-    public County(int county_id, String county_name, String county_rank, double county_housing_cost) {
+    public County(int county_id, String county_name, int county_rank, double county_housing_cost) {
         this.county_id = county_id;
         this.county_name = county_name;
         this.county_rank = county_rank;
@@ -53,11 +53,11 @@ public class County {
         this.county_name = county_name;
     }
 
-    public String getCounty_rank() {
+    public int getCounty_rank() {
         return county_rank;
     }
 
-    public void setCounty_rank(String county_rank) {
+    public void setCounty_rank(int county_rank) {
         this.county_rank = county_rank;
     }
 
