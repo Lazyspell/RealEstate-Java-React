@@ -5,6 +5,7 @@ import com.example.realestatejavareact.exceptions.AuthenticationException;
 import com.example.realestatejavareact.exceptions.BadRequestException;
 import com.example.realestatejavareact.exceptions.ResourceNotFoundException;
 import com.example.realestatejavareact.entities.Users;
+import com.example.realestatejavareact.exceptions.ResourcePersistenceException;
 import com.example.realestatejavareact.repositories.UserRepository;
 import com.example.realestatejavareact.web.dtos.Credentials;
 import com.example.realestatejavareact.web.dtos.Principal;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -56,7 +57,37 @@ public class UserService {
             throw new BadRequestException("Invalid user was input");
         }
 
+        boolean conflictingUsername = doesUsernameExist(newUser.getUsername());
+
+        if(!conflictingUsername){
+            throw new ResourcePersistenceException("Username already exists");
+        }
+
+        boolean conflictingEmail = doesEmailExist(newUser.getEmail());
+
+        if(!conflictingEmail){
+            throw new ResourcePersistenceException("Email already exists");
+        }
+
         return userRepository.save(newUser);
+
+    }
+
+    @Transactional(readOnly = true)
+    private boolean doesUsernameExist(String username){
+
+        Users conflictingUser = userRepository.findByUsername(username);
+
+        return conflictingUser == null;
+
+    }
+
+    @Transactional(readOnly = true)
+    private boolean doesEmailExist(String email){
+
+        Users conflictingUser = userRepository.findByEmail(email);
+
+        return conflictingUser == null;
 
     }
 
